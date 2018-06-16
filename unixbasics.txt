@@ -1,0 +1,340 @@
+Super Block-->
+
+Consists of following fields
+– Size of the file system
+– Number of free blocks in the file system
+– List of free blocks available in the file system
+– Index of the next free block in the free block list
+– Size of the Inode list
+– Number of free Inodes in the file system
+
+
+Navigating to insert mode 
+–by pressing the keys i, a, o, O at command mode 
+
+i Inserts text to the left of the cursor 
+I inserts text at the beginning of the line, no matter where  the cursor is positioned on the current line a 
+
+Begins inserting after the character (append) on which  the cursor is positioned 
+A begins inserting at the end of the current line, no matter  where the cursor is positioned on that line o 
+
+Begins inserting at a new line at the end of the current  line, no matter where the cursor is positioned on that line O 
+
+Begins inserting text on a new line above the current line
+
+Basic Cursor Movement commands
+h Move cursor to the left one character.
+l Move cursor to the right one character. 
+j Move cursor down one line. 
+k Move cursor up one line. 
+^ Move cursor to the beginning of the line.  
+$ Move cursor to the end of the current line.
+G Move cursor to the last line of your file.
+
+CommandPurpose :wTo save your file but not quit vi
+:w  filenameTo save the contents in the screen  (buffer) into the file named filename.
+:q To quit if you haven't made any edits
+:q! To quit without saving the changes  made in the current edit
+:wq  To both quit and save your edits.
+
+Commands for deletion
+
+x Deletes character at current cursor position
+X Deletes character left to the cursor position
+dw deletes the word till the next space or punctuation
+dd deletes current line
+ndx deletes n number of characters placed after the cursor
+ndw deletes n number of words placed after the cursor
+ndd deletes n number of lines placed after the cursor.
+d0 deletes the current line from the cursor to beggining of the line.
+d$ deletes the current line from the cursor to end of the line
+
+Miscellaneous commands
+
+R Replaces the content of the file with whatever you type from the position where the cursor is initially placed. This command brings you to insert mode, 
+
+where the only editing operation possible is to replacing the contents over the cursor
+. repeats the action performed by the last command
+u undoes the effect of the last command
+U Restores the changes to the current line since you moved the cursor to this line
+w moves to the next word
+b moves to the previous word
+~ Changes the character at current position from uppercase to lower case or vice versa
+
+
+Commands for Copy(Yank) and Paste
+
+yy Copy (yank)  the current line
+Nyy Copy N lines, beginning with the  current line (Example   6yy) 
+yw Copy (yank)  the current word
+p Put  the text copied already in next  line 
+P Put  the text copied already before  in previous line
+
+:n1,n2y n1 is beginning line number and n2 is ending line number (Example :2,4y copies lines 2, 3 and 4.)
+p,P, :put to paste the copied line
+
+
+vi ‐r secFile It will show the temporary file options for recovery
+
+Pattern searching 
+
+/text Search forward (down) for text 
+?text Search backward (up) for text 
+n Repeat last search in the same direction 
+N Repeat last search in the opposite direction
+f<char> Search forward for a character on current line  (Example fe)
+F<char>Search backward for a character on current line  (Example Fe) 
+; Repeat last character search in the same direction 
+% Find matching ( ),  [ ], or { } 
+
+Substitution of Text
+
+:n1,n2s/oldtext/newtext/gc
+ –oldtext is replaced by newtext from lines n1 to n2 
+n1 is the beginning line number n2 is the ending line number
+ s means to substitute text matching the pattern (oldtext)  with text specified by (newtext) 
+g stands for global (optional). Indicates you want to  substitute all occurrences on the indicated lines. If you  
+
+don’t use g, the editor substitutes only the first  occurrence on the indicated lines. 
+c stands for confirm (optional). It indicates you want to  confirm each substitution before vi completes it.
+
+
+File and directory commands 
+
+–cat 
+–cp
+–mv 
+–rm
+ –chmod 
+–cmp 
+–diff 
+–top
+
+We can concatenate the contents of two files  using cat command 
+–Syntax:cat <file1> <file2> ><destFile> [E.g. cat first  will  >  firstwill ]
+cat testfile > file2↵ 
+If the file file2 is not empty, it will be overwritten 
+–To avoid this, use >> •This appends to the old contents of file, i.e cat testfile >> file2↵
+
+cat food | grep Wok↵
+
+
+cp firstwill finalwill↵ copy a file [if finalwill already exists its content will be overwritten]
+
+
+cp command options
+
+-f if an existing destination file cannot be opened, remove it and try again
+-i prompt before overwrite 
+-l link files instead of copying
+-u copy only when the SOURCE file is newer than the destination file or when the destination file is missing 
+-R or –r copy directories recursively
+
+
+Moving (and Renaming) File / Directory 
+
+mv finalwill finalwish
+it renames and moves the file and after this operation, the file finalwill will never be visible in the file system
+
+mv myfile exercises/ ↵ Moves the file named myfileto the directory exercises. file named myfilewill be available inside exercises directory  
+
+not in current location
+
+
+mv command options
+
+-f This option replaces the file / directory if it exists already in the destination without prompting to the user. Note that this is the default if the 
+
+standard input is not a terminal.
+
+-i This option prompts us, if we are trying to replace a file/directory in the destination
+
+
+rm help(removes the file) 
+rmdir exercises(removed the directory) 
+
+
+Chmod command
+
+Command Explanation 
+chmodu+x willExecute permission is added to the owner for the file will
+ chmod ugo+x willExecute permission is added to all for the file will
+ chmod o-x willExecute permission is removed from the others for the file will
+ chmod g+r+w willRead and write permission are added to the group for the file will
+
+
+chmod 777 will Read, write and execute  permissions to all for the  file will 
+chmod 774 will Owner and group have all  three permissions and  others have only read  permission for the file will 
+chmod 400 will Read permission to the  owner for the file will is set.  Group and others don’t have  any access to the file
+
+
+cmp –Compare two files 
+Syntax: cmp <file name1> <file name2>
+diff –Compare the contents of two ASCII files 
+Syntax: diff <file name1> <file name2>
+top –List top CPU processes 
+Syntax: top
+
+
+Filters 
+
+–wc
+–sort
+–head 
+–tail 
+–grep 
+–pipe 
+–tee
+
+
+wc firstwill↵ Output:11  82 429 firstwill  
+firstwill has 11 lines, 82 words  and 429 characters
+
+wc -l firstwill
+wc -w firstwill 
+wc -c firstwill
+
+sort finalwill↵ 
+sort command compares the first character in each  of the lines –If the first character for two lines is same then the  
+
+second character is used in comparison
+
+•If we want the repeated lines to be ignored, we can use  –u option with the sort command
+
+The most common flags are as follows:
+ ‐b Ignore leading blanks 
+‐d Consider only blanks and alphanumeric  characters 
+‐f Fold lowercase to uppercase  characters before sorting (i.e.,"Bill",  "bill" and “BILL” are treated the same) 
+‐r Reverse the result of comparisons
+
+
+head –Reads the first few lines of any text given to it as an  input and writes them to the display screen 
+–By default, head returns the first ten lines of  eachfilename that is provided to it Syntax:head [options] [file(s)] 
+$ head firstwill↵ –displays the first ten lines of the file named “firstwill”
+
+The ‐n option is used followed by an integer indicating  the number of lines desired.
+
+$ head –n5 firstwillfinalwill↵
+
+tail –similar to the head command except that it reads the final lines  in files rather than the first lines 
+$ tail –n5 firstwill finalwill   
+
+
+
+grep –helps in searching strings in a file 
+
+Syntax:grep"string" FILE_PATTERN 
+
+Example: to find the string “Wok” from the file  “food” and display those lines to the standard  output;
+ we use the following command: [SysPgm@labserver~] $ grep Wok food↵ 
+–displays the line(s) containing Wok in the file food 
+–It is done by matching the pattern Wok in the file  food
+
+Checking for a given string in multiple files can be  done with the same syntax as in  grep "string" FILE_PATTERN
+
+grep options 
+–To find how many lines matches the pattern, use –c  option as follows grep‐c FILE_PATTERN 
+–To find string irrespective of case, use –i option as  follows grep–i"string" FILE_PATTERN
+ 
+
+The indirection operator ( |) is called as pipe symbol 
+–helps joining two commands 
+–output from one command becomes the input of  the command 
+–the standard output of the command to the left of  the pipe symbol becomes the standard input of the  command to the right of the pipe symbol
+ –Two or more commands connected in this way forms  a pipe
+
+Example ls| wc↵ –Will execute the ls command first, direct the  output to the next command wc –The command wc is executed and the output is  
+
+shown in the terminal
+•[SysPgm@labserver~] $ cat finalwill| sort↵ 
+•[SysPgm@labserver~] $ ls> op| wc↵
+
+
+____________________________________________________________________________________________________________________________________________________________
+
+
+Shell Scripting
+
+A Shell 
+•Isaprogramthatinterpretscommands 
+•Itallowsausertoexecutecommands 
+•Eithermanuallyataterminalor automaticallyinprogramscalledshellscripts 
+•Ashellisnotanoperatingsystem 
+•Itisawaytointerfacewiththeoperating systemandexecutecommands 
+•LoginshellisBASH=BourneAgainShell 
+
+
+ls‐l *.c --All file names in the current directory that end in  .c
+
+WildCards
+
+* Matches any number of characters including none 
+? Matches a single character 
+[ijk] Matches a single character either i, j or k 
+[!ijk] Not i,j or k 
+[x-z] Atleast a single character within this ASCII range 
+[!x-z] Not a single character within this range 
+[a-dx-z] Atleast a single character within a to d or x to z ASCII range
+
+#this script performs different arithmetic operations [Comment!!!]
+
+echo ‘expr $a + $b’ #Addition 
+echo ‘expr $a ‐ $b’ #Subtraction 
+echo ‘expr $a \* $b’ #Multiplication 
+echo ‘expr $a / $b’ #Division 
+echo ‘expr $a % $b’  #Modular division, returns reminder
+
+In unix
+Zero Value (0)Yes/True0
+NON-ZERO ValueNo/False-1, 32, 55 anything but not zero
+
+test Expression   for expression
+
+if test 5 -eq 6    if [ 5 -eq6 ]
+if test 5 -ne 6    if [ 5 -ne 6 ] 
+if test 5 -lt 6
+if test 5 -le 6
+if test 5 -gt 6    if [ 5 -gt 6 ]
+if test 5 -ge6     if [ 5 -ge 6 ]
+
+
+! expressionLogical  NOT
+expression1 -a expression2  Logical AND
+expression1 -o expression2  Logical OR
+
+if condition          
+ then
+              condition is zero (true -0)               
+        execute all commands up to else statement      
+  else if
+ condition is not true
+ then   
+      execute all commands up to fi 
+   fi
+
+
+for((expr1;expr2;expr3)) 
+do ..... repeatallstatementsbetweendo and done
+until
+expr 2 is TRUE done
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
